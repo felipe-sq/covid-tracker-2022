@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
+import InfoBox from "./InfoBox";
 import "./App.css";
 
 function App() {
@@ -48,16 +49,15 @@ function App() {
       </div>
       <div className="app__datetime">
         <h5>
-          {date} {time}
+          {date} | {time}
         </h5>
       </div>
 
-      {/* Header */}
-      {/* Title + Select Input Dropdown */}
-
-      {/* InfoBoxes */}
-      {/* InfoBoxes */}
-      {/* InfoBoxes */}
+      <div className="app__stats">
+        <InfoBox title="Coronavirus Cases" cases={1234} total={2000} />
+        <InfoBox title="Recovered" cases={1234} total={3000} />
+        <InfoBox title="Deaths" cases={1234} total={5000} />
+      </div>
 
       {/* Table */}
       {/* Graph */}
