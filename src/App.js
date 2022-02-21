@@ -5,6 +5,7 @@ import {
   Select,
   Card,
   CardContent,
+  Table,
 } from "@mui/material";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
@@ -13,6 +14,15 @@ import "./App.css";
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
+  const [countryInfo, setCountryInfo] = useState({});
+
+  useEffect(() => {
+    fetch("https://disease.sh/v3/covid-19/all")
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
 
   useEffect(() => {
     const fetchCountriesData = async () => {
@@ -31,7 +41,18 @@ function App() {
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
-    setCountry(countryCode);
+
+    const url =
+      countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+    await fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(countryCode);
+        setCountryInfo(data);
+      });
   };
 
   const currentDate = new Date();
@@ -66,17 +87,32 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Coronavirus Cases" cases={1234} total={2000} />
-          <InfoBox title="Recovered" cases={1234} total={3000} />
-          <InfoBox title="Deaths" cases={1234} total={5000} />
+          <InfoBox
+            title="Coronavirus Cases"
+            cases={countryInfo.todayCases}
+            total={countryInfo.cases}
+          />
+          <InfoBox
+            title="Recovered"
+            cases={countryInfo.todayRecovered}
+            total={countryInfo.recovered}
+          />
+          <InfoBox
+            title="Deaths"
+            cases={countryInfo.todayDeaths}
+            total={countryInfo.deaths}
+          />
         </div>
 
         <Map />
       </div>
       <Card className="app__right">
         <CardContent>
-          {/* Table */}
-          {/* Graph */}
+          <div className="app__right__information">
+            <h3>Live Cases by Country</h3>
+            {/* <Table countries={} /> */}
+            <h3>Worldwide New Cases</h3>
+          </div>
         </CardContent>
       </Card>
     </div>

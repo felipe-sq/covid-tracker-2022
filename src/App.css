@@ -1,11 +1,17 @@
 * {
   margin: 0;
-  padding: 2px;
 }
 
 body {
   background-color: #f5f6fa;
 }
+
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
 .app__header {
   display: flex;
   align-items: center;
@@ -20,8 +26,21 @@ body {
   justify-content: space-between;
 }
 
+.app__left {
+  flex: 0.9;
+}
+
 .app__stats {
   display: flex;
-  align-content: left;
   justify-content: space-between;
+}
+
+@media (max-width: 990px) {
+  .app__header {
+    flex-direction: column;
+  }
+
+  .app__stats {
+    flex-direction: column;
+  }
 }
