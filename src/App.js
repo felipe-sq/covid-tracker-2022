@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FormControl, MenuItem, Select, Card, CardContent } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  Card,
+  CardContent,
+} from "@mui/material";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
 import "./App.css";
