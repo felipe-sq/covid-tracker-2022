@@ -1,5 +1,6 @@
 * {
-  margin: 5px;
+  margin: 0;
+  padding: 2px;
 }
 
 body {
@@ -21,6 +22,6 @@ body {
 
 .app__stats {
   display: flex;
-  align-items: center;
+  align-content: left;
   justify-content: space-between;
 }
