@@ -5,16 +5,18 @@ import {
   Select,
   Card,
   CardContent,
-  Table,
 } from "@mui/material";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
 import "./App.css";
+import Table from "./Table";
+import { sortData } from "./util";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -33,6 +35,9 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -81,9 +86,8 @@ function App() {
           </FormControl>
         </div>
         <div className="app__datetime">
-          <h5>
-            {date} | {time}
-          </h5>
+          <h5> Date: {date}</h5>
+          <h5> Time: {time}</h5>
         </div>
 
         <div className="app__stats">
@@ -110,7 +114,7 @@ function App() {
         <CardContent>
           <div className="app__right__information">
             <h3>Live Cases by Country</h3>
-            {/* <Table countries={} /> */}
+            <Table countries={tableData} />
             <h3>Worldwide New Cases</h3>
           </div>
         </CardContent>
