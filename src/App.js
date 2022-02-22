@@ -11,12 +11,14 @@ import Map from "./Map";
 import "./App.css";
 import Table from "./Table";
 import { sortData } from "./util";
+import LineGraph from "./LineGraph";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -108,7 +110,9 @@ function App() {
           />
         </div>
 
-        <Map />
+        <Map
+        // code here
+        />
       </div>
       <Card className="app__right">
         <CardContent>
@@ -116,6 +120,7 @@ function App() {
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
             <h3>Worldwide New Cases</h3>
+            <LineGraph />
           </div>
         </CardContent>
       </Card>
